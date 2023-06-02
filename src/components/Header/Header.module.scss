@@ -1,0 +1,55 @@
+.root {
+	background-color: #fff;
+	padding: 10px 0;
+	border-bottom: 1px solid #e0e0e0;
+	margin-bottom: 15px;
+}
+
+.inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	background-color: rgb(153, 90, 90);
+	color: #fff;
+	font-weight: 700;
+	line-height: 35px;
+	text-transform: uppercase;
+	letter-spacing: 0.15px;
+	border-radius: 5px;
+	padding: 0 10px;
+	text-decoration: none;
+	position: relative;
+	div {
+		padding-left: 9px;
+	}
+
+	&:hover {
+		background-color: #4361ee;
+	}
+}
+.logo::before {
+	content: 'R';
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: #61dafb;
+	color: #fff;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 50%;
+	margin-right: 5px;
+	position: absolute;
+	top: 2px;
+	left: 0;
+}
+
+.buttons {
+	display: flex;
+
+	button {
+		margin-left: 10px;
+	}
+}

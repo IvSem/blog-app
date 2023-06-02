@@ -1,0 +1,47 @@
+.title {
+	input {
+		font-size: 32px;
+		font-weight: 700;
+	}
+
+	div {
+		&:before,
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.image {
+	display: block;
+	margin: 0 auto;
+	width: 50%;
+	padding-top: 20px;
+}
+
+.tags {
+	margin: 15px 0;
+}
+
+.editor {
+	margin: 30px 0;
+
+	:global {
+		.cm-s-easymde {
+			border: 0;
+			font-size: 22px;
+		}
+		.editor-toolbar {
+			border: 0;
+			background-color: rgb(140, 102, 102);
+		}
+	}
+}
+
+.buttons {
+	display: flex;
+
+	button {
+		margin-right: 15px;
+	}
+}
