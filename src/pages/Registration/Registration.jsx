@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-
 import styles from './Registration.module.scss';
 import { useForm } from 'react-hook-form';
 import { FormHelperText, IconButton, InputAdornment } from '@mui/material';
@@ -12,8 +11,12 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from 'redux/user/operations';
 import { selectError } from 'redux/user/slice';
+import { useNavigate } from 'react-router-dom';
+import { useLoading } from 'hooks/useLoading';
+import { Loader } from 'components';
 
 const Registration = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const errMsg = useSelector(selectError);
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -29,11 +32,25 @@ const Registration = () => {
 		formState: { errors, isValid },
 	} = useForm({ mode: 'onBlur' });
 
+	const { loading, startLoading, stopLoading } = useLoading();
+
 	const onSubmit = data => {
-		alert(JSON.stringify(data, null, 2));
-		dispatch(signUpUser(data));
+		startLoading();
+		dispatch(signUpUser(data))
+			.then(res => {
+				if (!res.error) {
+					navigate('/');
+				}
+			})
+			.finally(() => {
+				stopLoading();
+			});
+
 		reset();
 	};
+	if (loading) {
+		return <Loader />;
+	}
 
 	return (
 		<Paper classes={{ root: styles.root }} elevation={6}>
@@ -45,6 +62,7 @@ const Registration = () => {
 			</div>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<TextField
+					autoFocus
 					className={styles.field}
 					label="Full name"
 					fullWidth
@@ -146,5 +164,4 @@ const Registration = () => {
 	);
 };
 
-
-export default Registration
+export default Registration;

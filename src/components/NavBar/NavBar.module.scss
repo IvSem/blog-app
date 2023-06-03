@@ -1,0 +1,49 @@
+.ibg {
+	position: relative;
+	width: 53px;
+	height: 53px;
+	padding-bottom: 7%;
+	border-radius: 50%;
+	overflow: hidden;
+	display: none;
+	z-index: 2;
+	@media (max-width: 900px) {
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background-color: white;
+		}
+		display: block;
+	}
+}
+
+.ibg img {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	object-fit: cover;
+	z-index: 23;
+}
+
+.link {
+	color: inherit;
+	font-weight: 700;
+	text-decoration: none;
+	font-size: 25px;
+}
+.linkRoute {
+	padding-left: 10px;
+	font-size: inherit;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+.active {
+	color: red;
+}

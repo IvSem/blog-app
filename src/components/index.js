@@ -7,3 +7,6 @@ export * from './CommentsBlock';
 export * from './TagsBlock';
 export * from './Layout';
 export * from './SearchField/SearchField';
+export * from './Loader/Loader';
+export * from './NavBar/NavBar';
+export * from './UserMenu/UserMenu';

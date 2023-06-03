@@ -1,13 +1,14 @@
 import { Container } from '@mui/system';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './Header/Header';
+import { Loader } from './Loader/Loader';
+import { NavBar } from './NavBar/NavBar';
 
 export const Layout = () => {
 	return (
 		<>
-			<Header />
-			<Suspense fallback={null}>
+			<NavBar />
+			<Suspense fallback={<Loader />}>
 				<Container maxWidth="lg">
 					<Outlet />
 				</Container>

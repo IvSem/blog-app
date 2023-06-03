@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
-import { Post, TagsBlock } from 'components';
+import { Post, SearchField, TagsBlock } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, fetchTags } from 'redux/posts/operations';
 import { selectAllTags } from 'redux/posts/slice';
@@ -16,7 +16,8 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const tags = useSelector(selectAllTags);
 	const { user: userData } = useAuth();
-	const { posts, popularPosts, isLoading } = usePosts();
+	const { isLoading, filteredNewPosts, filteredPopularPosts, filterValue } =
+		usePosts();
 
 	useEffect(() => {
 		dispatch(fetchPosts());
@@ -26,13 +27,22 @@ const Home = () => {
 	const handleChangeTab = (event, newValue) => {
 		setValueTab(newValue);
 	};
+
 	return (
 		<>
 			<Box sx={{ width: '100%' }}>
 				<Box
-					sx={{ borderBottom: 1, borderColor: 'divider', marginBottom: '15px' }}
+					sx={{
+						borderBottom: 1,
+						borderColor: 'divider',
+						marginBottom: '15px',
+						display: 'flex',
+
+						alignItems: 'center',
+					}}
 				>
 					<Tabs
+						sx={{ flexGrow: 1 }}
 						value={valueTab}
 						onChange={handleChangeTab}
 						aria-label="basic tabs example"
@@ -40,11 +50,21 @@ const Home = () => {
 						<Tab label="New Posts" {...muiTab.a11yProps(0)} />
 						<Tab label="Popular" {...muiTab.a11yProps(1)} />
 					</Tabs>
+					<Box
+						sx={{
+							display: { xs: 'flex', sm: 'none', justifyContent: 'flex-end' },
+						}}
+					>
+						<SearchField />
+					</Box>
 				</Box>
 				<muiTab.TabPanel value={valueTab} index={0}>
 					<Grid container spacing={4}>
-						<Grid xs={8} item>
-							{posts?.map(
+						<Grid xs={12} sm={8} item>
+							{filteredNewPosts.length === 0 && (
+								<p>No post with that {filterValue}</p>
+							)}
+							{filteredNewPosts?.map(
 								({
 									_id,
 									title,
@@ -74,15 +94,18 @@ const Home = () => {
 								)
 							)}
 						</Grid>
-						<Grid xs={4} item>
+						<Grid sm={4} item>
 							<TagsBlock items={tags} isLoading={isLoading} />
 						</Grid>
 					</Grid>
 				</muiTab.TabPanel>
 				<muiTab.TabPanel value={valueTab} index={1}>
 					<Grid container spacing={4}>
-						<Grid xs={8} item>
-							{popularPosts?.map(
+						<Grid xs={12} sm={8} item>
+							{filteredPopularPosts.length === 0 && (
+								<p>No post with that {filterValue}</p>
+							)}
+							{filteredPopularPosts?.map(
 								({
 									_id,
 									title,
@@ -112,7 +135,7 @@ const Home = () => {
 								)
 							)}
 						</Grid>
-						<Grid xs={4} item>
+						<Grid sm={4} item>
 							<TagsBlock items={tags} isLoading={isLoading} />
 						</Grid>
 					</Grid>

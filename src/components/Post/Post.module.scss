@@ -42,6 +42,9 @@ $blue: #4361ee;
 
 .wrapper {
 	padding: 10px 20px 20px;
+	@media (max-width: 456px) {
+		padding: 10px;
+	}
 }
 
 .content {
@@ -51,10 +54,32 @@ $blue: #4361ee;
 		font-size: 22px;
 		line-height: 36px;
 	}
+
+	@media (max-width: 456px) {
+		margin: 15px 0px 25px;
+		p {
+			margin:0;
+			font-size: 18px;
+			line-height: 1;
+		}
+		ul,
+		ol {
+			margin: 0;
+			padding: 0;
+			padding-left: 10px;
+		}
+		h2 {
+			font-size: 20px;
+			margin: 5px 0 5px 0;
+		}
+	}
 }
 
 .indention {
 	padding-left: 40px;
+	@media (max-width: 456px) {
+		padding-left: 0;
+	}
 }
 
 .title {
@@ -73,6 +98,10 @@ $blue: #4361ee;
 	&Full {
 		font-size: 42px;
 		font-weight: 900;
+	}
+
+	@media (max-width: 456px) {
+		font-size: 25px;
 	}
 }
 
@@ -94,6 +123,12 @@ $blue: #4361ee;
 		a {
 			text-decoration: none;
 			color: #000;
+		}
+	}
+	@media (max-width: 456px) {
+		margin-top: 0;
+		li {
+			margin-right: 8px;
 		}
 	}
 }

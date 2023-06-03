@@ -16,16 +16,20 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInUser } from 'redux/user/operations';
 import { selectError } from 'redux/user/slice';
+import { useNavigate } from 'react-router-dom';
+import { useLoading } from 'hooks/useLoading';
+import { Loader } from 'components';
 
 const Login = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const errMessage = useSelector(selectError);
 	const [showPassword, setShowPassword] = React.useState(false);
+	const { loading, startLoading, stopLoading } = useLoading();
 	const handleClickShowPassword = () => setShowPassword(show => !show);
 	const handleMouseDownPassword = event => {
 		event.preventDefault();
 	};
-
 	const {
 		register,
 		handleSubmit,
@@ -34,10 +38,23 @@ const Login = () => {
 	} = useForm({ mode: 'onBlur' });
 
 	const onSubmit = data => {
-		alert(JSON.stringify(data, null, 2));
-		dispatch(logInUser(data));
+		startLoading();
+		dispatch(logInUser(data))
+			.then(res => {
+				if (!res.error) {
+					navigate('/');
+				}
+			})
+			.catch(console.log)
+			.finally(() => {
+				stopLoading();
+			});
 		reset();
 	};
+
+	if (loading) {
+		return <Loader />;
+	}
 
 	return (
 		<Paper classes={{ root: styles.root }} elevation={6}>
@@ -54,6 +71,7 @@ const Login = () => {
 			</Typography>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<TextField
+					autoFocus
 					className={styles.field}
 					label="E-Mail"
 					type="email"

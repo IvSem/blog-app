@@ -9,7 +9,6 @@ import { getOnePosts } from 'services/fetchApi';
 const FullPost = () => {
 	const [data, setData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	console.log(':>  FullPost  isLoading:', isLoading);
 	const userData = useSelector(selectUser);
 
 	const handleChangeIsLoading = value => {

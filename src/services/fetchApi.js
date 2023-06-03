@@ -44,7 +44,6 @@ export const createNewPost = async post => {
 export const updatePost = async (id, updatedPost) => {
 	try {
 		const response = await axios.patch(`/posts/${id}/edit`, updatedPost);
-		console.log(response);
 		return response.data;
 	} catch (err) {
 		console.warn('createNewPost ERR', err);

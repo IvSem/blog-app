@@ -30,6 +30,7 @@ const AddPost = () => {
 			const response = await axios.post('/upload', formData);
 			setImageUrl(response.data.url);
 		} catch (err) {
+			alert('Error with upload files,try again later');
 			console.warn(err);
 		}
 	};

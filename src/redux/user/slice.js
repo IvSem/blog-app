@@ -23,7 +23,6 @@ const handleAuthFullfield = (state, { payload }) => {
 };
 
 const handleRejected = (state, { payload }) => {
-	console.log('Error Auth ', payload);
 	if (payload) {
 		state.error = payload;
 	}

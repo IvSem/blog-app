@@ -9,6 +9,7 @@ const initialState = {
 	tags: {
 		items: [],
 	},
+	filter: '',
 };
 
 const handlePending = state => {
@@ -18,7 +19,11 @@ const handlePending = state => {
 export const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
-	reducer: {},
+	reducers: {
+		changeFilterValue: (state, action) => {
+			state.filter = action.payload;
+		},
+	},
 	extraReducers: builder => {
 		builder.addCase(fetchPosts.pending, handlePending);
 		builder.addCase(fetchPosts.fulfilled, (state, action) => {
@@ -43,3 +48,6 @@ export const postsSlice = createSlice({
 export const selectPostsIsLoading = state => state.posts.posts.isLoading;
 export const selectAllPosts = state => state.posts.posts.items;
 export const selectAllTags = state => state.posts.tags.items;
+export const selectFilterValue = state => state.posts.filter;
+
+export const { changeFilterValue } = postsSlice.actions;
