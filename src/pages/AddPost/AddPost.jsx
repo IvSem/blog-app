@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import SimpleMDE from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
-import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { nanoid } from '@reduxjs/toolkit';
 import { formatedTags } from 'utils/formatedTagsCreate';
@@ -22,17 +21,41 @@ const AddPost = () => {
 	const [tags, setTags] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
+	//const handleChangeFile = async e => {
+	//	try {
+	//		const formData = new FormData();
+	//		const file = e.target.files[0];
+	//		formData.append('image', file);
+	//		const response = await axios.post('/upload', formData);
+	//		console.log(':>  handleChangeFile  response:', response);
+	//		setImageUrl(response.data.fileData);
+	//	} catch (err) {
+	//		alert('Error with upload files,try again later');
+	//		console.warn(err);
+	//	}
+	//};
 	const handleChangeFile = async e => {
-		try {
-			const formData = new FormData();
-			const file = e.target.files[0];
-			formData.append('image', file);
-			const response = await axios.post('/upload', formData);
-			setImageUrl(response.data.url);
-		} catch (err) {
-			alert('Error with upload files,try again later');
-			console.warn(err);
+		const file = e.target.files[0];
+		const maxSizeInBytes = 1 * 1024 * 1024; // 5 MB
+
+		if (file.size > maxSizeInBytes) {
+			alert('Розмір файлу перевищує максимальний допустимий розмір, 1 мб');
+			e.target.value = null;
+			return;
 		}
+
+		const reader = new FileReader();
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+		reader.onload = () => {
+			setImageUrl(reader.result);
+		};
+		reader.onerror = err => {
+			alert('Error convert image to Base64');
+			console.warn('Error', err);
+		};
 	};
 
 	const onClickRemoveImage = () => {
@@ -129,7 +152,8 @@ const AddPost = () => {
 					</Button>
 					<img
 						className={styles.image}
-						src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
+						src={imageUrl}
+						//src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
 						alt="Uploaded"
 						width={400}
 					/>
@@ -165,6 +189,7 @@ const AddPost = () => {
 				}}
 				fullWidth
 			/>
+
 			<SimpleMDE
 				className={styles.editor}
 				value={text}

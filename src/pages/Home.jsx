@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
-import { Post, SearchField, TagsBlock } from 'components';
+import { Loader, Post, SearchField, TagsBlock } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, fetchTags } from 'redux/posts/operations';
 import { selectAllTags } from 'redux/posts/slice';
@@ -60,43 +60,49 @@ const Home = () => {
 				</Box>
 				<muiTab.TabPanel value={valueTab} index={0}>
 					<Grid container spacing={4}>
-						<Grid xs={12} sm={8} item>
-							{filteredNewPosts.length === 0 && (
-								<p>No post with that {filterValue}</p>
-							)}
-							{filteredNewPosts?.map(
-								({
-									_id,
-									title,
-									imageUrl,
-									user,
-									createdAt,
-									viewsCount,
-									comments,
-									tags,
-								}) => (
-									<Post
-										key={_id}
-										id={_id}
-										title={title}
-										imageUrl={imageUrl}
-										user={{
-											avatarUrl: user.avatarUrl,
-											fullName: user.fullName,
-										}}
-										createdAt={createdAt}
-										viewsCount={viewsCount}
-										commentsCount={comments.length}
-										tags={tags}
-										isEditable={userData?._id === user?._id}
-										isLoading={isLoading}
-									/>
-								)
-							)}
-						</Grid>
-						<Grid sm={4} item>
-							<TagsBlock items={tags} isLoading={isLoading} />
-						</Grid>
+						{isLoading ? (
+							<Loader />
+						) : (
+							<>
+								<Grid xs={12} sm={8} item>
+									{filteredNewPosts.length === 0 && (
+										<p>No post with that {filterValue}</p>
+									)}
+									{filteredNewPosts?.map(
+										({
+											_id,
+											title,
+											imageUrl,
+											user,
+											createdAt,
+											viewsCount,
+											comments,
+											tags,
+										}) => (
+											<Post
+												key={_id}
+												id={_id}
+												title={title}
+												imageUrl={imageUrl}
+												user={{
+													avatarUrl: user.avatarUrl,
+													fullName: user.fullName,
+												}}
+												createdAt={createdAt}
+												viewsCount={viewsCount}
+												commentsCount={comments.length}
+												tags={tags}
+												isEditable={userData?._id === user?._id}
+												isLoading={isLoading}
+											/>
+										)
+									)}
+								</Grid>
+								<Grid sm={4} item>
+									<TagsBlock items={tags} isLoading={isLoading} />
+								</Grid>
+							</>
+						)}
 					</Grid>
 				</muiTab.TabPanel>
 				<muiTab.TabPanel value={valueTab} index={1}>

@@ -18,7 +18,11 @@ export const TagsBlock = ({ items, isLoading = true }) => {
 				{items?.map((name, i) => (
 					<Link
 						key={name}
-						style={{ textDecoration: 'none', color: 'black' }}
+						style={{
+							textDecoration: 'none',
+							color: 'black',
+							wordBreak: 'break-all',
+						}}
 						to={`/tags/${name}`}
 					>
 						<ListItem disablePadding>

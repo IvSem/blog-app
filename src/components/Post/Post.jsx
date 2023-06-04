@@ -11,7 +11,6 @@ import { PostSkeleton } from './Skeleton';
 import { Link } from 'react-router-dom';
 import defaultImg from 'images/noavatar.png';
 import { convertedData } from 'utils/convertedData';
-import { checkLink } from 'utils/checkLink';
 import { useDispatch } from 'react-redux';
 import { fetchDeletePost } from 'redux/posts/operations';
 
@@ -58,11 +57,12 @@ export const Post = ({
 					<img
 						className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
 						loading="lazy"
-						src={
-							checkLink(imageUrl)
-								? imageUrl
-								: `${process.env.REACT_APP_API_URL}${imageUrl}`
-						}
+						src={imageUrl}
+						//src={
+						//	checkLink(imageUrl)
+						//		? imageUrl
+						//		: `${process.env.REACT_APP_API_URL}${imageUrl}`
+						//}
 						alt={title}
 					/>
 				</Link>

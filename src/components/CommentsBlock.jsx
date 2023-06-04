@@ -12,7 +12,9 @@ import { Paper, Typography } from '@mui/material';
 export const CommentsBlock = ({ items, children, isLoading = true, title }) => {
 	return (
 		<Paper sx={{ display: { xs: 'block', sm: 'block' } }}>
-			<Typography variant="h6">{title}</Typography>
+			<Typography sx={{ p: '10px 0 0 20px' }} variant="h6">
+				{title}
+			</Typography>
 
 			<List>
 				{items.map((el, index) => (
@@ -39,6 +41,7 @@ export const CommentsBlock = ({ items, children, isLoading = true, title }) => {
 								<ListItemText
 									primary={el?.author.fullName}
 									secondary={el?.content}
+									sx={{ wordBreak: 'break-all' }}
 								/>
 							)}
 						</ListItem>
