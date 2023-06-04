@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { SideBlock } from './SideBlock/SideBlock';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
@@ -9,10 +7,13 @@ import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import Skeleton from '@mui/material/Skeleton';
 import { stringAvatar } from '../utils/avatar';
+import { Paper, Typography } from '@mui/material';
 
-export const CommentsBlock = ({ items, children, isLoading = true }) => {
+export const CommentsBlock = ({ items, children, isLoading = true, title }) => {
 	return (
-		<SideBlock title="Comments">
+		<Paper sx={{ display: { xs: 'block', sm: 'block' } }}>
+			<Typography variant="h6">{title}</Typography>
+
 			<List>
 				{items.map((el, index) => (
 					<React.Fragment key={index}>
@@ -46,6 +47,6 @@ export const CommentsBlock = ({ items, children, isLoading = true }) => {
 				))}
 			</List>
 			{children}
-		</SideBlock>
+		</Paper>
 	);
 };

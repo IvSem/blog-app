@@ -61,7 +61,11 @@ const FullPost = () => {
 				<ReactMarkdown children={data.text} />
 			</Post>
 
-			<CommentsBlock items={data.comments} isLoading={isLoading}>
+			<CommentsBlock
+				items={data.comments}
+				isLoading={isLoading}
+				title="Comments"
+			>
 				<AddComment
 					avatarUrl={userData?.avatarUrl}
 					fullName={userData?.fullName}
