@@ -53,7 +53,7 @@ export const Post = ({
 				</div>
 			)}
 			{imageUrl ? (
-				<Link to={`/posts/${id}`}>
+				<Link to={`/posts/${id}`} className={styles.linkImage}>
 					<img
 						className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
 						loading="lazy"

@@ -2,6 +2,9 @@
 	input {
 		font-size: 32px;
 		font-weight: 700;
+		@media (max-width: 599.98px) {
+			font-size: 25px;
+		}
 	}
 
 	div {

@@ -6,7 +6,6 @@ import SimpleMDE from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { nanoid } from '@reduxjs/toolkit';
 import { formatedTags } from 'utils/formatedTagsCreate';
 import { createNewPost, getOnePosts, updatePost } from 'services/fetchApi';
 import { PostSkeleton } from 'components/Post/Skeleton';
@@ -92,11 +91,6 @@ const AddPost = () => {
 			autofocus: true,
 			placeholder: 'Enter text...',
 			status: false,
-			autosave: {
-				enabled: true,
-				uniqueId: nanoid(),
-				delay: 1000,
-			},
 		}),
 		[]
 	);
@@ -127,7 +121,10 @@ const AddPost = () => {
 	}
 
 	return (
-		<Paper style={{ padding: 30, marginBottom: 30 }} elevation={6}>
+		<Paper
+			sx={{ padding: { xs: '10px', sm: '15px', md: '30px' }, marginBottom: 30 }}
+			elevation={6}
+		>
 			<Button
 				variant="outlined"
 				size="large"
