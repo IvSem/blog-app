@@ -1,12 +1,16 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { fetchUser, logInUser, signUpUser } from './operations';
 
+const savedThemeMode = localStorage.getItem('myAppDataTheme');
+const themeMode = savedThemeMode ? JSON.parse(savedThemeMode) : 'light';
+
 const initialState = {
 	user: null,
 	isLoading: false,
 	isLoggedIn: false,
 	isRefreshing: false,
 	error: null,
+	theme: themeMode,
 };
 const handlePending = state => {
 	state.isLoading = true;
@@ -40,6 +44,13 @@ export const userSlice = createSlice({
 			state.isLoggedIn = false;
 			state.isRefreshing = false;
 		},
+		changeTheme: (state, action) => {
+			state.theme = action.payload;
+			window.localStorage.setItem(
+				'myAppDataTheme',
+				JSON.stringify(action.payload)
+			);
+		},
 	},
 	extraReducers: builder => {
 		builder.addCase(signUpUser.fulfilled, handleAuthFullfield);
@@ -71,5 +82,6 @@ export const selectIsLoggedIn = state => state.user.isLoggedIn;
 export const selectIsRefreshing = state => state.user.isRefreshing;
 export const selectError = state => state.user.error;
 export const selectIsLoading = state => state.user.isLoading;
+export const selectTheme = state => state.user.theme;
 
-export const { logOut } = userSlice.actions;
+export const { logOut, changeTheme } = userSlice.actions;

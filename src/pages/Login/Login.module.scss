@@ -3,10 +3,13 @@
 	max-width: 500px;
 	padding: 30px;
 	margin: 5vh auto;
+	@media (max-width: 599.98px) {
+		padding: 20px 10px;
+	}
 }
 
 .title {
-	color: #4361ee;
+	color: inherit;
 	text-align: center !important;
 	font-weight: bold !important;
 	margin-bottom: 30px !important;

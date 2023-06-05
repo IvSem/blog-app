@@ -1,8 +1,7 @@
 $blue: #4361ee;
 
 .root {
-	background-color: #fff;
-	border: 1px solid #dedede;
+	border: 1px solid rgba(192, 191, 191, 0.662);
 	border-radius: 6px;
 	overflow: hidden;
 	margin-bottom: 15px;
@@ -21,8 +20,7 @@ $blue: #4361ee;
 
 	&Full {
 		&:hover {
-			background-color: #fff;
-			border: 1px solid #dedede;
+			border: 1px solid inherit;
 			box-shadow: none;
 			transform: scale(1);
 		}
@@ -32,8 +30,8 @@ $blue: #4361ee;
 .linkImage {
 	position: relative;
 	display: block;
-	width: 100%;
-	//margin: 0 auto;
+	width: 90%;
+	margin: 0 auto;
 	padding-bottom: 40%;
 }
 
@@ -63,9 +61,15 @@ $blue: #4361ee;
 		font-size: 22px;
 		line-height: 36px;
 	}
+	@media (max-width: 899.98px) {
+		margin: 10px 0 10px;
+		p {
+			line-height: 1.2;
+			margin: 10px 0;
+		}
+	}
 
 	@media (max-width: 456px) {
-		margin: 15px 0px 25px;
 		p {
 			margin: 0;
 			font-size: 18px;
@@ -86,6 +90,10 @@ $blue: #4361ee;
 
 .indention {
 	padding-left: 40px;
+
+	@media (max-width: 899.98px) {
+		padding-left: 15px;
+	}
 	@media (max-width: 456px) {
 		padding-left: 0;
 	}
@@ -97,7 +105,7 @@ $blue: #4361ee;
 
 	a {
 		text-decoration: none;
-		color: #000;
+		color: inherit;
 
 		&:hover {
 			color: $blue;
@@ -107,10 +115,17 @@ $blue: #4361ee;
 	&Full {
 		font-size: 42px;
 		font-weight: 900;
+
+		@media (max-width: 899.98px) {
+			line-height: 1.25;
+			font-size: 35px;
+			font-weight: 700;
+		}
 	}
 
 	@media (max-width: 456px) {
 		font-size: 25px;
+		font-weight: 700;
 	}
 }
 
@@ -131,7 +146,7 @@ $blue: #4361ee;
 
 		a {
 			text-decoration: none;
-			color: #000;
+			color: inherit;
 		}
 	}
 	@media (max-width: 456px) {
@@ -159,11 +174,12 @@ $blue: #4361ee;
 			margin-right: 5px;
 		}
 	}
+	@media (max-width: 899.98px) {
+		margin-top: 0;
+	}
 }
 
 .skeleton {
-	background-color: #fff;
-	border: 1px solid #dedede;
 	border-radius: 6px;
 	overflow: hidden;
 	margin-bottom: 15px;
@@ -202,4 +218,21 @@ $blue: #4361ee;
 	border-radius: 10px;
 	opacity: 0;
 	transition: all 0.15s ease-in-out;
+	z-index: 200;
+	border: 1px solid gray;
+	& > a > button {
+		margin-right: 1px;
+		position: relative;
+
+		&::after {
+			content: '';
+			position: absolute;
+			width: 1px;
+			height: 100%;
+			top: 0;
+			right: 0;
+			background-color: rgb(52, 23, 81);
+			z-index: 2;
+		}
+	}
 }

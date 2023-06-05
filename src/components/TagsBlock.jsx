@@ -20,7 +20,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
 						key={name}
 						style={{
 							textDecoration: 'none',
-							color: 'black',
+							color: 'inherit',
 							wordBreak: 'break-all',
 						}}
 						to={`/tags/${name}`}

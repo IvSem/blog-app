@@ -5,21 +5,26 @@ import { useDispatch } from 'react-redux';
 import { changeFilterValue } from 'redux/posts/slice';
 import { usePosts } from 'hooks/usePosts';
 
-const Search = styled('form')(({ theme }) => ({
-	position: 'relative',
-	borderRadius: theme.shape.borderRadius,
-	backgroundColor: alpha(theme.palette.common.black, 0.15),
-	'&:hover': {
-		backgroundColor: alpha(theme.palette.common.black, 0.25),
-	},
-	marginLeft: 0,
-	marginRight: 5,
-	width: '100px',
-	[theme.breakpoints.up('sm')]: {
-		marginLeft: theme.spacing(1),
-		width: '100%',
-	},
-}));
+const Search = styled('form')(({ theme }) => {
+	const bgSearch =
+		theme.palette.mode === 'light'
+			? alpha(theme.palette.common.black, 0.35)
+			: alpha(theme.palette.common.white, 0.35);
+
+	return {
+		position: 'relative',
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: bgSearch,
+		'&:hover': {
+			backgroundColor: alpha(theme.palette.common.black, 0.25),
+		},
+		width: '110px',
+		[theme.breakpoints.up('sm')]: {
+			marginLeft: theme.spacing(1),
+			width: '200px',
+		},
+	};
+});
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
 	padding: '0px 5px',
@@ -28,6 +33,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 	pointerEvents: 'none',
 	display: 'flex',
 	alignItems: 'center',
+	color: '#fff',
 	justifyContent: 'center',
 	[theme.breakpoints.up('sm')]: {
 		padding: theme.spacing(0, 2),
@@ -35,7 +41,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-	color: 'inherit',
+	color: '#fff',
 	'& .MuiInputBase-input': {
 		padding: theme.spacing(1, 1, 1, 0),
 		// vertical padding + font size from searchIcon
@@ -44,10 +50,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 		width: '100%',
 		[theme.breakpoints.up('sm')]: {
 			paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-			width: '12ch',
-			'&:focus': {
-				width: '20ch',
-			},
 		},
 	},
 }));

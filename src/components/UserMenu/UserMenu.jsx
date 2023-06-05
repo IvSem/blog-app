@@ -2,6 +2,7 @@ import {
 	Avatar,
 	Box,
 	Button,
+	Divider,
 	IconButton,
 	Menu,
 	MenuItem,
@@ -17,6 +18,7 @@ import { logOut } from 'redux/user/slice';
 import { stringAvatar } from 'utils/avatar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from 'hooks/useAuth';
+import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
 
 const pages = [
 	//{ path: '/my-articles', name: 'My articles' },
@@ -111,7 +113,7 @@ export const UserMenu = ({ user }) => {
 					</Box>
 				</>
 			) : (
-				<>
+				<Box sx={{ position: 'relative' }}>
 					<Link to="/login">
 						<Button sx={{ mr: 1 }} variant="contained" color="success">
 							Sign In
@@ -122,7 +124,20 @@ export const UserMenu = ({ user }) => {
 							Sign Up
 						</Button>
 					</Link>
-				</>
+
+					<Box
+						sx={{
+							mr: { xs: '0', sm: '10px' },
+							pl: 1,
+							display: { xs: 'block', sm: 'none ' },
+							position: 'absolute',
+							top: -7,
+							transform: 'translate(-77%)',
+						}}
+					>
+						<CustomSwitch />
+					</Box>
+				</Box>
 			)}
 			{isLoggedIn && (
 				<Box sx={{ flexGrow: 0, display: { xs: 'flex', sm: 'none' } }}>
@@ -171,6 +186,22 @@ export const UserMenu = ({ user }) => {
 								</MenuItem>
 							);
 						})}
+						<Divider />
+						<MenuItem>
+							<Button
+								variant="contained"
+								color="warning"
+								fullWidth
+								onClick={handleClickLogout}
+							>
+								Log Out
+							</Button>
+						</MenuItem>
+						<MenuItem sx={{ position: 'relative' }}>
+							<Box sx={{ position: 'absolute', top: 0, right: -10 }}>
+								<CustomSwitch />
+							</Box>
+						</MenuItem>
 					</Menu>
 				</Box>
 			)}

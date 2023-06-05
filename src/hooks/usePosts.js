@@ -33,6 +33,10 @@ export const usePosts = () => {
 		return filteredPosts(filterValue, popularPosts);
 	}, [filterValue, popularPosts]);
 
+	//const filteredNewPosts = filteredPosts(filterValue, posts);
+
+	//const filteredPopularPosts = filteredPosts(filterValue, popularPosts);
+
 	return {
 		posts,
 		popularPosts,

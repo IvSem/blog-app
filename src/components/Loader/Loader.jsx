@@ -1,9 +1,10 @@
 import React from 'react';
 import preLoader from 'images/preloader2.gif';
+import { Box } from '@mui/material';
 export const Loader = () => {
 	return (
-		<div
-			style={{
+		<Box
+			sx={{
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
@@ -14,9 +15,11 @@ export const Loader = () => {
 				right: 0,
 				bottom: 0,
 				zIndex: 10,
+				bgcolor: 'background.default',
+				color: 'text.primary',
 			}}
 		>
 			<img src={preLoader} alt="preloader" />
-		</div>
+		</Box>
 	);
 };

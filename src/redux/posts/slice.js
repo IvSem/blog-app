@@ -4,7 +4,7 @@ import { fetchDeletePost, fetchPosts, fetchTags } from './operations';
 const initialState = {
 	posts: {
 		items: [],
-		isLoading: false,
+		isLoading: true,
 	},
 	tags: {
 		items: [],

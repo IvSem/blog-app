@@ -14,13 +14,20 @@ export const NavBar = () => {
 	const { user } = useAuth();
 
 	return (
-		<AppBar position="sticky" sx={{ backgroundColor: '#4e3861', mb: '10px' }}>
+		<AppBar
+			position="sticky"
+			color="secondary"
+			sx={{
+				color: 'text.primary',
+				mb: 1,
+			}}
+		>
 			<Container maxWidth="lg">
 				<Toolbar disableGutters>
 					<Box
 						sx={{
 							display: { xs: 'none', md: 'flex' },
-							backgroundColor: '#974f4f',
+							backgroundColor: '#afb977',
 							p: 1,
 							borderRadius: '5px',
 						}}
@@ -70,14 +77,13 @@ export const NavBar = () => {
 
 					<Box
 						sx={{
-							mr: { xs: '0', sm: '17px' },
+							mr: { xs: '0', sm: '10px' },
 							pl: 1,
 							display: { xs: 'none', sm: 'block' },
 						}}
 					>
 						<SearchField />
 					</Box>
-
 					<UserMenu user={user} />
 				</Toolbar>
 			</Container>

@@ -47,7 +47,7 @@ export const Post = ({
 							<EditIcon />
 						</IconButton>
 					</Link>
-					<IconButton onClick={onClickRemove} color="secondary">
+					<IconButton onClick={onClickRemove} color="error">
 						<DeleteIcon />
 					</IconButton>
 				</div>

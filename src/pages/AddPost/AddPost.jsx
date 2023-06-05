@@ -9,6 +9,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { formatedTags } from 'utils/formatedTagsCreate';
 import { createNewPost, getOnePosts, updatePost } from 'services/fetchApi';
 import { PostSkeleton } from 'components/Post/Skeleton';
+import { Box } from '@mui/material';
+import { CustomSwitch } from 'components/CustomSwitch/CustomSwitch';
+import { ArrowBack } from '@mui/icons-material';
 
 const AddPost = () => {
 	const { id: postId } = useParams();
@@ -121,87 +124,136 @@ const AddPost = () => {
 	}
 
 	return (
-		<Paper
-			sx={{ padding: { xs: '10px', sm: '15px', md: '30px' }, marginBottom: 30 }}
-			elevation={6}
-		>
-			<Button
-				variant="outlined"
-				size="large"
-				onClick={() => inputFileRef.current.click()}
+		<Box sx={{ pb: 2 }}>
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					position: 'relative',
+				}}
 			>
-				Upload a picture
-			</Button>
-			<input
-				ref={inputFileRef}
-				type="file"
-				onChange={handleChangeFile}
-				hidden
-			/>
-			{imageUrl && (
-				<>
-					<Button
-						variant="contained"
-						color="error"
-						onClick={onClickRemoveImage}
-					>
-						Delete
-					</Button>
-					<img
-						className={styles.image}
-						src={imageUrl}
-						//src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
-						alt="Uploaded"
-						width={400}
-					/>
-				</>
-			)}
-			<br />
-			<TextField
-				classes={{ root: styles.title }}
-				variant="standard"
-				placeholder="The title of the article..."
-				value={title}
-				onChange={e => {
-					setTitle(e.target.value);
-				}}
-				fullWidth
-			/>
-
-			<TextField
-				classes={{ root: styles.tags }}
-				variant="standard"
-				placeholder="Specify the tags, separated by commas"
-				InputProps={{
-					style: {
-						'::placeholder': {
-							backgroundColor: 'yellow',
-							fontWeight: 'bold',
+				<Button
+					variant="contained"
+					sx={{
+						backgroundImage: 'linear-gradient(to right, #baf29c, #193f67)',
+						color: '#fff',
+						'&:hover': {
+							color: '#ffb1f1',
+							'& .MuiSvgIcon-root': {
+								color: '#9bff5c',
+								transition: 'all 0.3s ease-in-out',
+							},
+							boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.3)',
+							transition: 'all 0.3s ease-in-out',
 						},
-					},
-				}}
-				value={tags}
-				onChange={e => {
-					setTags(e.target.value);
-				}}
-				fullWidth
-			/>
-
-			<SimpleMDE
-				className={styles.editor}
-				value={text}
-				onChange={onChange}
-				options={options}
-			/>
-			<div className={styles.buttons}>
-				<Button size="large" variant="contained" onClick={onSubmit}>
-					{Boolean(postId) ? 'Save' : 'Submit'}
+						marginBottom: '10px',
+					}}
+					startIcon={<ArrowBack />}
+					onClick={() => {
+						navigate(-1);
+					}}
+				>
+					Go Back
 				</Button>
-				<Link to="/">
-					<Button size="large">Cancel</Button>
-				</Link>
-			</div>
-		</Paper>
+				<Box
+					sx={{
+						display: { xs: 'none', sm: 'block' },
+						position: 'absolute',
+						top: -5,
+						right: -27,
+					}}
+				>
+					<CustomSwitch />
+				</Box>
+			</Box>
+			<Paper
+				sx={{
+					padding: { xs: '10px', sm: '15px', md: '30px' },
+				}}
+				elevation={6}
+			>
+				<Button
+					variant="outlined"
+					color="primary"
+					size="large"
+					sx={{ fontWeight: 900, mr: 1 }}
+					onClick={() => inputFileRef.current.click()}
+				>
+					Upload a picture
+				</Button>
+				<input
+					ref={inputFileRef}
+					type="file"
+					onChange={handleChangeFile}
+					hidden
+				/>
+				{imageUrl && (
+					<>
+						<Button
+							variant="contained"
+							color="error"
+							onClick={onClickRemoveImage}
+						>
+							Delete
+						</Button>
+						<img
+							className={styles.image}
+							src={imageUrl}
+							//src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
+							alt="Uploaded"
+							width={400}
+						/>
+					</>
+				)}
+				<br />
+				<TextField
+					classes={{ root: styles.title }}
+					variant="standard"
+					placeholder="The title of the article..."
+					value={title}
+					onChange={e => {
+						setTitle(e.target.value);
+					}}
+					fullWidth
+				/>
+
+				<TextField
+					classes={{ root: styles.tags }}
+					variant="standard"
+					placeholder="Specify the tags, separated by commas"
+					InputProps={{
+						style: {
+							'::placeholder': {
+								backgroundColor: 'yellow',
+								fontWeight: 'bold',
+							},
+						},
+					}}
+					value={tags}
+					onChange={e => {
+						setTags(e.target.value);
+					}}
+					fullWidth
+				/>
+
+				<SimpleMDE
+					className={styles.editor}
+					value={text}
+					onChange={onChange}
+					options={options}
+				/>
+				<div className={styles.buttons}>
+					<Button size="large" variant="contained" onClick={onSubmit}>
+						{Boolean(postId) ? 'Save' : 'Submit'}
+					</Button>
+					<Link to="/">
+						<Button size="large" variant="outlined" color="warning">
+							Cancel
+						</Button>
+					</Link>
+				</div>
+			</Paper>
+		</Box>
 	);
 };
 

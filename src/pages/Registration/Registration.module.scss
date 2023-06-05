@@ -3,10 +3,13 @@
 	max-width: 500px;
 	padding: 30px;
 	margin: 5vh auto;
+	@media (max-width: 599.98px) {
+		padding: 15px 10px;
+	}
 }
 
 .title {
-	color: #4361ee;
+	color: inherit;
 	text-align: center !important;
 	font-weight: bold !important;
 	margin-bottom: 15px !important;
@@ -16,4 +19,10 @@
 	display: flex;
 	justify-content: center;
 	margin-bottom: 30px;
+	@media (max-width: 899.98px) {
+		margin-bottom: 20px;
+	}
+	@media (max-width: 599.98px) {
+		margin-bottom: 15px;
+	}
 }

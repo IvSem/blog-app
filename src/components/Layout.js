@@ -9,7 +9,14 @@ export const Layout = () => {
 		<>
 			<NavBar />
 			<Suspense fallback={<Loader />}>
-				<Container maxWidth="lg">
+				<Container
+					maxWidth="lg"
+					sx={{
+						backgroundColor: 'background.default',
+						color: 'text.primary',
+						minHeight: '100vh',
+					}}
+				>
 					<Outlet />
 				</Container>
 			</Suspense>

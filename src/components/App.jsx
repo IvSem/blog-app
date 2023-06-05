@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { fetchUser } from 'redux/user/operations';
 
 import { routes } from 'router';
+import { Box } from '@mui/material';
 
 export const App = () => {
 	const [isLoadingApp, setIsLoadingApp] = useState(true);
@@ -19,7 +20,11 @@ export const App = () => {
 	return isLoadingApp ? (
 		<Loader />
 	) : (
-		<>
+		<Box
+			bgcolor={'background.default'}
+			color={'text.primary'}
+			sx={{ minHeight: '100vh' }}
+		>
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					{routes.map((route, index) => (
@@ -32,6 +37,6 @@ export const App = () => {
 					))}
 				</Route>
 			</Routes>
-		</>
+		</Box>
 	);
 };

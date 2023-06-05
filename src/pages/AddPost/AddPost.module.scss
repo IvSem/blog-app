@@ -19,7 +19,8 @@
 	display: block;
 	margin: 0 auto;
 	width: 50%;
-	padding-top: 20px;
+	margin-top: 20px;
+	border-radius: 20px;
 }
 
 .tags {
@@ -31,13 +32,19 @@
 
 	:global {
 		.cm-s-easymde {
-			border: 0;
+			color: inherit;
+			background-color: inherit;
 			font-size: 22px;
 		}
 		.editor-toolbar {
-			border: 0;
 			background-color: rgb(140, 102, 102);
 		}
+	}
+	@media (max-width: 899.98px) {
+		margin: 20px 0;
+	}
+	@media (max-width: 599.98px) {
+		margin: 10px 0;
 	}
 }
 
